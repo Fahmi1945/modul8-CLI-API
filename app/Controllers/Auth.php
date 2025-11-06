@@ -10,6 +10,7 @@ class Auth extends ResourceController
     protected $format = 'json';
     protected $modelName = UserModel::class;
 
+
     // ===== REGISTER USER =====
     public function register()
     {
@@ -17,8 +18,10 @@ class Auth extends ResourceController
         $userModel = new UserModel();
 
         // Cek username atau email sudah terdaftar
-        if ($userModel->where('username', $data['username'])->first() ||
-            $userModel->where('email', $data['email'])->first()) {
+        if (
+            $userModel->where('username', $data['username'])->first() ||
+            $userModel->where('email', $data['email'])->first()
+        ) {
             return $this->respond(['message' => 'Username atau email sudah terdaftar'], 400);
         }
 
